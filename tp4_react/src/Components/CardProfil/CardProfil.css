@@ -1,0 +1,18 @@
+
+.buttonCardProfil
+{
+   float:right;
+}
+
+.pp
+{
+    border-radius: 50%;
+    border : 10px solid rgb(243, 242, 242);
+    margin-bottom: 5%;
+   
+}
+
+.ppCenter
+{
+    text-align: center;
+}
