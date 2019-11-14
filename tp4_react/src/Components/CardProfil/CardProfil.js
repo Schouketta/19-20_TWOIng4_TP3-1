@@ -23,8 +23,13 @@ class CardProfil extends Component {
         //les props = constantes, peuvent se ballader entre les components
         //les states = modifiable avec setState
         ///////////////////////:{require(this.props.photo)}
-        this.handleChange=this.handleChange.bind(this);
-        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleChangeBulbi=this.handleChangeBulbi.bind(this);
+        this.handleChangeCara=this.handleChangeCara.bind(this);
+        this.handleChangeSala=this.handleChangeSala.bind(this);
+
+        this.handleSubmitBulbi=this.handleSubmitBulbi.bind(this);
+        this.handleSubmitCara=this.handleSubmitCara.bind(this);
+        this.handleSubmitSala=this.handleSubmitSala.bind(this);
         
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -37,9 +42,11 @@ class CardProfil extends Component {
             photo:this.props.photo,
             show: false, //pour modals
             color:'',
+            colorBulbi:'',
+            colorSala:'',
+            colorCara:'',
             modal: false
             
-
         }
 
        
@@ -60,16 +67,44 @@ class CardProfil extends Component {
 		this.setState({ show: true });
 	}
 
-    handleChange(event)
+    handleChangeBulbi(event)
     {
-        this.setState({color : event.target.value});
+        this.setState({colorBulbi : event.target.value});
     }
 
-    handleSubmit(event)
+    handleChangeCara(event)
+    {
+        this.setState({colorCara : event.target.value});
+    }
+
+    handleChangeSala(event)
+    {
+        this.setState({colorSala : event.target.value});
+    }
+
+
+
+    handleSubmitBulbi(event)
     {
         event.preventDefault();
         this.setState(state => ({
-            color: this.state.color
+            colorBulbi: this.state.colorBulbi
+        }));
+    }
+
+    handleSubmitCara(event)
+    {
+        event.preventDefault();
+        this.setState(state => ({
+            colorCara: this.state.colorCara
+        }));
+    }
+
+    handleSubmitSala(event)
+    {
+        event.preventDefault();
+        this.setState(state => ({
+            colorSala: this.state.colorSala
         }));
     }
 
@@ -80,57 +115,172 @@ class CardProfil extends Component {
 
         const {profil} = this.props;
        
-        return (
-            <div>
-                
-                <Row>
-                <Col>
-                    <Card style={{backgroundColor:this.state.color}}>
-                    <CardBody>
-                        
-                        <div className="ppCenter"><img className="pp" width="40%" src={profil.photo} /></div> 
+        if(profil.prenom=="Bulbizarre")
+        {
 
-
-                        <CardText>Prénom : {profil.prenom}</CardText>
-                        <CardText>Nom : {profil.nom}</CardText>
-                        <CardText>Date de naissance : {profil.dateDeNaissance}</CardText>
-                        <Button color="info" className="buttonCardProfil" onClick={this.handleShow} onClick={this.toggle}>Change style</Button>
-                        
-                        
-
+            return (
+                <div>
                     
-                    <Modal isOpen={this.state.modal} show={this.state.show} onHide={this.handleClose} toggle={this.toggle}>
-                        <ModalHeader toggle={this.toggle}>
-                            Change background color
-                        </ModalHeader>
-                        <ModalBody>
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormGroup>
-                                <Label for="exampleColor">Color</Label>
-                                <Input
-                                type="color"
-                                name="color"
-                                id="exampleColor"
-                                placeholder="color placeholder"
-                                value={this.state.color}
-                                onChange={this.handleChange}
-                                />
-                            </FormGroup>
-                            <Button type="submit" color="info" className="buttonCardProfil" >Change style</Button>
-                            </Form>
-                            </ModalBody>
+                    <Row>
+                    <Col>
+                        <Card style={{backgroundColor:this.state.colorBulbi}}>
+                        <CardBody>
                             
-                    </Modal>
+                            <div className="ppCenter"><img className="pp" width="40%" src={profil.photo} /></div> 
+    
+                            <Row>
+                            <Col sm={{ size: 'auto', offset: 0 }}><CardText>Prénom : {profil.prenom}</CardText></Col>
+                            <Col sm={{ size: 'auto', offset: 6}}><CardText>Type : {profil.nom}</CardText></Col>
+                            </Row>
+                            <CardText>Date de naissance : {profil.dateDeNaissance}</CardText>
+                            <Button color="info" className="buttonCardProfil" onClick={this.handleShow} onClick={this.toggle}>Change style</Button>
+    
                         
-                        </CardBody>
-                       
-                    </Card>
-                </Col>
-                </Row>
+                        <Modal isOpen={this.state.modal} show={this.state.show} onHide={this.handleClose} toggle={this.toggle}>
+                            <ModalHeader toggle={this.toggle}>
+                                Change background color
+                            </ModalHeader>
+                            <ModalBody>
+                            <Form onSubmit={this.handleSubmitBulbi}>
+                                <FormGroup>
+                                    <Label for="exampleColor">Color</Label>
+                                    <Input
+                                    type="color"
+                                    name="color"
+                                    id="exampleColor"
+                                    placeholder="color placeholder"
+                                    value={this.state.colorBulbi}
+                                    onChange={this.handleChangeBulbi}
+                                    />
+                                </FormGroup>
+                                <Button type="submit" color="info" className="buttonCardProfil" onClick={this.toggle}>Close</Button>
+                                </Form>
+                                </ModalBody>
+                                
+                        </Modal>
+                            
+                            </CardBody>
+                           
+                        </Card>
+                    </Col>
+                    </Row>
+    
+                 
+                </div>
+            );
+        }
+        else if(profil.prenom=="Carapuce")
+        {
+            return (
+                <div>
+                    
+                    <Row>
+                    <Col>
+                        <Card style={{backgroundColor:this.state.colorCara}}>
+                        <CardBody>
+                            
+                            <div className="ppCenter"><img className="pp" width="40%" src={profil.photo} /></div> 
+    
+                            <Row>
+                            <Col sm={{ size: 'auto', offset: 0 }}><CardText>Prénom : {profil.prenom}</CardText></Col>
+                            <Col sm={{ size: 'auto', offset: 6 }}><CardText>Type: {profil.nom}</CardText></Col>
+                            </Row>
+                            <CardText>Date de naissance : {profil.dateDeNaissance}</CardText>
+                            <Button color="info" className="buttonCardProfil" onClick={this.handleShow} onClick={this.toggle}>Change style</Button>
+                            
+                            
+    
+                        
+                        <Modal isOpen={this.state.modal} show={this.state.show} onHide={this.handleClose} toggle={this.toggle}>
+                            <ModalHeader toggle={this.toggle}>
+                                Change background color
+                            </ModalHeader>
+                            <ModalBody>
+                            <Form onSubmit={this.handleSubmitCara}>
+                                <FormGroup>
+                                    <Label for="exampleColor">Color</Label>
+                                    <Input
+                                    type="color"
+                                    name="color"
+                                    id="exampleColor"
+                                    placeholder="color placeholder"
+                                    value={this.state.colorCara}
+                                    onChange={this.handleChangeCara}
+                                    />
+                                </FormGroup>
+                                <Button type="submit" color="info" className="buttonCardProfil" onClick={this.toggle}>Close</Button>
+                                </Form>
+                                </ModalBody>
+                                
+                        </Modal>
+                            
+                            </CardBody>
+                           
+                        </Card>
+                    </Col>
+                    </Row>
+    
+                 
+                </div>
+            );
+        }
+        else if(profil.prenom=="Salamèche")
+        {
+            return (
+                <div>
+                    
+                    <Row>
+                    <Col>
+                        <Card style={{backgroundColor:this.state.colorSala}}>
+                        <CardBody>
+                            
+                            <div className="ppCenter"><img className="pp" width="40%" src={profil.photo} /></div> 
+    
+                            <Row>
+                            <Col sm={{ size: 'auto', offset: 0 }}><CardText>Prénom : {profil.prenom}</CardText></Col>
+                            <Col sm={{ size: 'auto', offset: 6 }}><CardText>Type : {profil.nom}</CardText></Col>
+                            </Row>
+                            <CardText>Date de naissance : {profil.dateDeNaissance}</CardText>
+                            <Button color="info" className="buttonCardProfil" onClick={this.handleShow} onClick={this.toggle}>Change style</Button>
+                            
+                            
+    
+                        
+                        <Modal isOpen={this.state.modal} show={this.state.show} onHide={this.handleClose} toggle={this.toggle}>
+                            <ModalHeader toggle={this.toggle}>
+                                Change background color
+                            </ModalHeader>
+                            <ModalBody>
+                            <Form onSubmit={this.handleSubmitSala}>
+                                <FormGroup>
+                                    <Label for="exampleColor">Color</Label>
+                                    <Input
+                                    type="color"
+                                    name="color"
+                                    id="exampleColor"
+                                    placeholder="color placeholder"
+                                    value={this.state.color.Sala}
+                                    onChange={this.handleChangeSala}
+                                    />
+                                </FormGroup>
+                                <Button type="submit" color="info" className="buttonCardProfil" onClick={this.toggle}>Close</Button>
+                                </Form>
+                                </ModalBody>
+                                
+                        </Modal>
+                            
+                            </CardBody>
+                           
+                        </Card>
+                    </Col>
+                    </Row>
+    
+                 
+                </div>
+            );
+        }
 
-             
-            </div>
-        );
+        
     }
 }
 
