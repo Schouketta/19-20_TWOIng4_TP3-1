@@ -18,7 +18,7 @@ class NavbarButton extends Component
     {
         return (
             
-               <Button color="secondary">{this.props.prenom}</Button>
+               <Button color="secondary" onClick={this.props.profilActif} > {this.props.prenom} </Button>
             
         );
     }

@@ -77,6 +77,8 @@ class CardProfil extends Component {
 
     
     render() {
+
+        const {profil} = this.props;
        
         return (
             <div>
@@ -86,12 +88,12 @@ class CardProfil extends Component {
                     <Card style={{backgroundColor:this.state.color}}>
                     <CardBody>
                         
-                        <div className="ppCenter"><img className="pp" width="40%" src={this.props.photo} /></div> 
+                        <div className="ppCenter"><img className="pp" width="40%" src={profil.photo} /></div> 
 
 
-                        <CardText>Prénom : {this.props.prenom}</CardText>
-                        <CardText>Nom : {this.props.nom}</CardText>
-                        <CardText>Date de naissance : {this.props.dateDeNaissance}</CardText>
+                        <CardText>Prénom : {profil.prenom}</CardText>
+                        <CardText>Nom : {profil.nom}</CardText>
+                        <CardText>Date de naissance : {profil.dateDeNaissance}</CardText>
                         <Button color="info" className="buttonCardProfil" onClick={this.handleShow} onClick={this.toggle}>Change style</Button>
                         
                         
